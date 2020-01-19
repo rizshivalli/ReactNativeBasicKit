@@ -1,7 +1,7 @@
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import HomeScreen from './screens/Home/HomeScreen';
-import ProfileScreen from './screens/Profile/ProfileScreen';
+import UsersScreen from './screens/Users/UsersScreen';
 
 const mainNavigator = createStackNavigator(
   {
@@ -11,8 +11,8 @@ const mainNavigator = createStackNavigator(
         headerShown: false,
       }),
     },
-    Profile: {
-      screen: ProfileScreen,
+    Users: {
+      screen: UsersScreen,
       navigationOptions: () => ({
         headerShown: false,
       }),

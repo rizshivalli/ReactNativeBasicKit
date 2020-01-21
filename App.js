@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import RootRouter from './src/RootRouter';
 
 const App = () => {
@@ -15,7 +15,11 @@ const App = () => {
     return route.routeName;
   };
 
-  return <RootRouter />;
+  return (
+    <SafeAreaView style={{flex: 1}}>
+      <RootRouter />
+    </SafeAreaView>
+  );
 };
 
 export default App;

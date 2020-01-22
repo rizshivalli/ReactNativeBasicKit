@@ -3,7 +3,6 @@ import {View, Text, StyleSheet, Alert} from 'react-native';
 import {connect} from 'react-redux';
 import NetInfo from '@react-native-community/netinfo';
 
-//TODO Network Listeners not working
 class NetworkListener extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -11,7 +10,9 @@ class NetworkListener extends React.PureComponent {
       netInfo: {},
     };
   }
+
   componentDidMount() {
+    /* Subscribe to network change*/
     this.unsubscribe = NetInfo.addEventListener(state => {
       this.setState({
         netInfo: state,
@@ -20,22 +21,10 @@ class NetworkListener extends React.PureComponent {
     });
   }
   componentWillUnmount() {
+    /* unsubscribe to network change*/
     this.unsubscribe();
     this.props.updateNetwork(false);
   }
-
-  returnNetInfoView = (state, removeDetails) => {
-    var netInformationView = [];
-    for (var key in state) {
-      if (removeDetails) {
-        if (key === 'details') {
-          continue;
-        }
-      }
-      netInformationView.push(console.log(JSON.stringify(state)));
-    }
-    return netInformationView;
-  };
 
   render() {
     const {network} = this.props;

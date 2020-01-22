@@ -2,7 +2,6 @@ import {NETWORK_CHANGE} from '../constants';
 
 export const actions = {
   updateNetwork: isConnected => {
-    console.log(123456);
     return {type: NETWORK_CHANGE, isConnected};
   },
 };

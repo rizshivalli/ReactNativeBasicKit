@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   Text,
@@ -6,33 +6,24 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from 'react-native';
-import {doGet, endPoint} from '../../api/server';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-const UsersScreen = () => {
+const UsersScreen = ({fetchUsers, user}) => {
   useEffect(() => {
-    fetchApi();
+    fetchUsers();
   }, []);
 
-  const [data, setData] = useState([]);
-
-  const fetchApi = async () => {
-    const response = await doGet(endPoint.users);
-    setData(response);
-  };
-  console.log(data);
   return (
     <>
-      {data ? (
+      {/* Conditional rendering based on data */}
+      {!user.loading ? (
         <View style={styles.container}>
           <FlatList
-            data={data}
+            data={user.userData}
             renderItem={({item}) => (
-              <View style={{margin: '2%'}}>
-                <View>
-                  <Text>{item.name}</Text>
-                </View>
-
-                <Text>{item.username}</Text>
+              <View style={{margin: '2%', elevation: 1000, shadow: 5}}>
+                <Text>{`Name is ${item.name} and the username is ${item.username}`}</Text>
               </View>
             )}
             keyExtractor={item => item.id.toString()}
@@ -53,4 +44,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-export default UsersScreen;
+
+/* Importing action from redux */
+
+import {fetchUsers} from '../../redux/reducer/UsersReducer';
+
+/* mapDispatchToProps and mapStateToProps from redux*/
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      fetchUsers,
+    },
+    dispatch,
+  );
+};
+
+const mapStateToProps = state => ({user: state.user});
+
+export default connect(mapStateToProps, mapDispatchToProps)(UsersScreen);

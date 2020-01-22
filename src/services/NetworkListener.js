@@ -62,7 +62,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  const {actions} = require('../redux/reducer/Network');
+  const {actions} = require('../redux/reducer/NetworkReducer');
 
   return {
     updateNetwork: isConnected => dispatch(actions.updateNetwork(isConnected)),

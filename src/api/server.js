@@ -18,7 +18,7 @@ export const checkNetworkConnection = async () => {
   }
 };
 
-export const doGet = async url => {
+export const getRequest = async url => {
   try {
     const response = await api.get(url);
     if (response.status === 200) {

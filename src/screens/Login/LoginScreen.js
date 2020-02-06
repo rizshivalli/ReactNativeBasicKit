@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, Image, Alert} from 'react-native';
-import {AppStyles} from '../../assets/themes';
+import {RNBKStyles} from '../../assets/themes';
 import {logo} from '../../assets/images';
 import {RNBKTextInput} from '../../assets/components';
 import {Button} from 'react-native-paper';
+import {showSnackBar} from '../../utils/Toast';
 
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState(''),
@@ -11,17 +12,18 @@ const LoginScreen = ({navigation}) => {
 
   const validateLogin = () => {
     if (!email.includes('@')) {
-      Alert.alert('Email Not Valid');
+      showSnackBar('Email Not Valid');
     } else if (password.length <= 6) {
-      Alert.alert('Password must contain 6 characters');
+      showSnackBar('Password must contain 6 characters');
     } else {
+      showSnackBar('Successfuly logged in');
       navigation.navigate('Home');
     }
   };
 
   return (
     <View style={styles.container}>
-      <View style={AppStyles.horizontalCenter}>
+      <View style={RNBKStyles.horizontalCenter}>
         <Image source={logo} style={styles.image} />
       </View>
 
@@ -53,7 +55,7 @@ const LoginScreen = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  container: {...AppStyles.fullScreen, marginHorizontal: '5%'},
+  container: {...RNBKStyles.fullScreen, marginHorizontal: '5%'},
   image: {
     borderRadius: 100,
   },

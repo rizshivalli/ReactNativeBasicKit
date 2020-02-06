@@ -1,3 +1,3 @@
-import AppStyles from './AppStyles';
+import RNBKStyles from './RNBKStyles';
 
-export {AppStyles};
+export {RNBKStyles};

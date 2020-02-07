@@ -11,6 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
 import io.invertase.firebase.fabric.crashlytics.RNFirebaseCrashlyticsPackage;
+import io.invertase.firebase.auth.RNFirebaseAuthPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -30,6 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
           // Firebase analytics package
           packages.add(new RNFirebaseAnalyticsPackage());         
           packages.add(new RNFirebaseCrashlyticsPackage());
+          packages.add(new RNFirebaseAuthPackage());
 
           return packages;
         }

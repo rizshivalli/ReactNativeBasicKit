@@ -5,10 +5,12 @@ import {logo} from '../../assets/images';
 import {RNBKTextInput} from '../../assets/components';
 import {Button} from 'react-native-paper';
 import {showSnackBar} from '../../utils/Toast';
+import firebase from 'react-native-firebase';
 
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState(''),
-    [password, setPassword] = useState('');
+    [password, setPassword] = useState(''),
+    [showLoading, setShowLoading] = useState(false);
 
   const validateLogin = () => {
     if (!email.includes('@')) {
@@ -16,11 +18,28 @@ const LoginScreen = ({navigation}) => {
     } else if (password.length <= 6) {
       showSnackBar('Password must contain 6 characters');
     } else {
-      showSnackBar('Successfuly logged in');
-      navigation.navigate('Home');
+      // showSnackBar('Successfuly logged in');
+      login();
+      // navigation.navigate('Home');
     }
   };
 
+  const login = async () => {
+    setShowLoading(true);
+    try {
+      const doLogin = await firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password);
+      setShowLoading(false);
+      if (doLogin.user) {
+        console.log(doLogin);
+        navigation.navigate('Home');
+      }
+    } catch (e) {
+      setShowLoading(false);
+      Alert.alert(e.message);
+    }
+  };
   return (
     <View style={styles.container}>
       <View style={RNBKStyles.horizontalCenter}>

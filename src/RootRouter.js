@@ -26,7 +26,7 @@ const mainNavigator = createStackNavigator(
     },
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Home',
     headerMode: 'float',
   },
 );
